@@ -6,6 +6,7 @@ import {
   searchForSpecificGrade,
   sumStudentGradeValue,
   subjectActivitiesAvg,
+  topThreeGrades,
 } from '../controller/gradesController.js';
 
 const router = express.Router();
@@ -71,6 +72,14 @@ router.get('/studentGrade/total', async (req, res, next) => {
 router.get('/subjectActivitiesAvg/:subject/:type', async (req, res, next) => {
   try {
     res.send(await subjectActivitiesAvg(req.params.subject, req.params.type));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/topThreeGrades/:subject/:type', async (req, res, next) => {
+  try {
+    res.send(await topThreeGrades(req.params.subject, req.params.type));
   } catch (err) {
     next(err);
   }

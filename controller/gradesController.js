@@ -137,7 +137,7 @@ async function subjectActivitiesAvg(subject, type) {
 
   // prettier-ignore
   if (!isSubject) {
-    throw new Error(`A disciplina ${subject} não está existe.`)
+    throw new Error(`A disciplina ${subject} não existe.`)
   } else if (!!isSubject && !isSubjectType) {
     throw new Error(`Não existe nenhuma atividade categorizada como ${type} para a disciplina ${subject}.`)
   }
@@ -154,6 +154,41 @@ async function subjectActivitiesAvg(subject, type) {
   return `A média das notas da atividade de categoria '${type}' para a disciplina [${subject}] é: ${arrayAvg(filteredSubjectActivities)}`;
 }
 
+async function topThreeGrades(subject, type) {
+  const data = JSON.parse(await readFile(global.fileName));
+
+  let filteredSubjectActivities = [];
+  let sortedSubjectActivities = [];
+  let result = [];
+
+  const isSubject = data.grades.some((grade) => {
+    return grade.subject === subject;
+  });
+
+  const isSubjectType = data.grades.some((grade) => {
+    return grade.subject === subject && grade.type === type;
+  });
+
+  // prettier-ignore
+  if (!isSubject) {
+    throw new Error(`A disciplina ${subject} não existe.`)
+  } else if (!!isSubject && !isSubjectType) {
+    throw new Error(`Não existe nenhuma atividade categorizada como ${type} para a disciplina ${subject}.`)
+  }
+
+  filteredSubjectActivities = data.grades.filter((grade) => {
+    return grade.subject === subject && grade.type === type;
+  });
+
+  sortedSubjectActivities = filteredSubjectActivities.sort(
+    (a, b) => b.value - a.value
+  );
+
+  result = sortedSubjectActivities.slice(0, 3);
+
+  return result;
+}
+
 export {
   insertItem,
   updateItem,
@@ -161,4 +196,5 @@ export {
   searchForSpecificGrade,
   sumStudentGradeValue,
   subjectActivitiesAvg,
+  topThreeGrades,
 };
