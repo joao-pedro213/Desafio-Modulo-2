@@ -3,6 +3,7 @@ import {
   insertItem,
   updateItem,
   deleteItem,
+  searchForSpecificGrade,
 } from '../controller/gradesController.js';
 
 const router = express.Router();
@@ -40,6 +41,14 @@ router.put('/', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     res.send(await deleteItem(req.params.id));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    res.send(await searchForSpecificGrade(req.params.id));
   } catch (err) {
     next(err);
   }
