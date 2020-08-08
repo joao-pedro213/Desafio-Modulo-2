@@ -1,5 +1,5 @@
 import express from 'express';
-import { insertItem } from '../controller/gradesController.js';
+import { insertItem, updateItem } from '../controller/gradesController.js';
 
 const router = express.Router();
 
@@ -15,6 +15,19 @@ router.post('/', async (req, res, next) => {
   }
 
     res.send(await insertItem(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/', async (req, res, next) => {
+  try {
+    // prettier-ignore
+    if (req.body.id == null || !req.body.student || !req.body.subject || !req.body.type || req.body.value == null) {
+          throw new Error('Os campos id, student, subject, type e value são obrigatórios!');
+        }
+
+    res.send(await updateItem(req.body));
   } catch (err) {
     next(err);
   }

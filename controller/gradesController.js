@@ -1,25 +1,55 @@
-import { promises as fs, write } from 'fs';
+import { promises as fs } from 'fs';
+import { timeStamp } from 'console';
 
 const { readFile, writeFile } = fs;
 
-async function insertItem(array) {
-  const grades = JSON.parse(await readFile(global.fileName));
+async function insertItem(item) {
+  const data = JSON.parse(await readFile(global.fileName));
 
   let newGrade = {};
 
   newGrade = {
-    id: grades.nextId++,
-    student: array.student,
-    subject: array.subject,
-    type: array.type,
-    value: array.value,
+    id: data.nextId++,
+    student: item.student,
+    subject: item.subject,
+    type: item.type,
+    value: item.value,
     timestamp: new Date(),
   };
 
-  grades.grades.push(newGrade);
+  data.grades.push(newGrade);
 
-  await writeFile(global.fileName, JSON.stringify(grades, null, 2));
+  await writeFile(global.fileName, JSON.stringify(data, null, 2));
   return newGrade;
 }
 
-export { insertItem };
+async function updateItem(item) {
+  const data = JSON.parse(await readFile(global.fileName));
+
+  let newGrade = {};
+
+  const index = data.grades.findIndex((a) => {
+    return parseInt(item.id) === a.id;
+  });
+
+  if (index === -1) {
+    throw new Error(`Não foi encontrada nenhuma grade com o id: ${item.id}.`);
+  }
+
+  newGrade = {
+    id: item.id,
+    student: item.student,
+    subject: item.subject,
+    type: item.type,
+    value: item.value,
+    timestamp: new Date(),
+  };
+
+  data.grades[index] = newGrade;
+
+  await writeFile(global.fileName, JSON.stringify(data, null, 2));
+
+  return newGrade;
+}
+
+export { insertItem, updateItem };
