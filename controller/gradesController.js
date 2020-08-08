@@ -52,4 +52,28 @@ async function updateItem(item) {
   return newGrade;
 }
 
-export { insertItem, updateItem };
+async function deleteItem(id) {
+  const data = JSON.parse(await readFile(global.fileName));
+
+  let filteredGrades = {};
+
+  const index = data.grades.findIndex((a) => {
+    return parseInt(id) === a.id;
+  });
+
+  if (index === -1) {
+    throw new Error(`Não foi encontrada nenhuma grade com o id: ${id}.`);
+  }
+
+  filteredGrades = data.grades.filter((grade) => {
+    return grade.id !== parseInt(id);
+  });
+
+  data.grades = filteredGrades;
+
+  await writeFile(global.fileName, JSON.stringify(data, null, 2));
+
+  return `A grade de id ${id} foi excluída com sucesso.`;
+}
+
+export { insertItem, updateItem, deleteItem };

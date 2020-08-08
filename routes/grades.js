@@ -1,5 +1,9 @@
 import express from 'express';
-import { insertItem, updateItem } from '../controller/gradesController.js';
+import {
+  insertItem,
+  updateItem,
+  deleteItem,
+} from '../controller/gradesController.js';
 
 const router = express.Router();
 
@@ -28,6 +32,14 @@ router.put('/', async (req, res, next) => {
         }
 
     res.send(await updateItem(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    res.send(await deleteItem(req.params.id));
   } catch (err) {
     next(err);
   }
