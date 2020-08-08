@@ -4,6 +4,7 @@ import {
   updateItem,
   deleteItem,
   searchForSpecificGrade,
+  sumStudentGradeValue,
 } from '../controller/gradesController.js';
 
 const router = express.Router();
@@ -49,6 +50,18 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     res.send(await searchForSpecificGrade(req.params.id));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/studentGrade/total', async (req, res, next) => {
+  try {
+    if (!req.body.student || !req.body.subject) {
+      throw new Error('Informe o nome do aluno e a grade que deseja buscar.');
+    }
+
+    res.send(await sumStudentGradeValue(req.body.student, req.body.subject));
   } catch (err) {
     next(err);
   }

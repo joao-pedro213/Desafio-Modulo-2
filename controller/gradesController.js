@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { timeStamp } from 'console';
+import { arraySum } from '../libs/operacoes.js';
 
 const { readFile, writeFile } = fs;
 
@@ -98,4 +98,34 @@ async function searchForSpecificGrade(id) {
   return filteredGrade;
 }
 
-export { insertItem, updateItem, deleteItem, searchForSpecificGrade };
+async function sumStudentGradeValue(student, subject) {
+  const data = JSON.parse(await readFile(global.fileName));
+
+  const isStudent = data.grades.some((grade) => {
+    return grade.student === student && grade.subject === subject;
+  });
+
+  if (!isStudent) {
+    throw new Error(
+      `Não existe nenhum ${student} cursando está disciplina ou ainda não existem notas lançadas.`
+    );
+  }
+
+  let studentSubjectActivities = data.grades.filter((grade) => {
+    return grade.student === student && grade.subject === subject;
+  });
+
+  studentSubjectActivities = studentSubjectActivities.map((activity) => {
+    return activity.value;
+  });
+  // prettier-ignore
+  return `A nota do aluno(a) ${student} para a disciplina [${subject}] é: ${arraySum(studentSubjectActivities)}`;
+}
+
+export {
+  insertItem,
+  updateItem,
+  deleteItem,
+  searchForSpecificGrade,
+  sumStudentGradeValue,
+};
