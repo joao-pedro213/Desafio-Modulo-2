@@ -6,4 +6,11 @@ function arraySum(array) {
   return sumResult;
 }
 
-export { arraySum };
+function arrayAvg(array) {
+  const sumResult = arraySum(array);
+  const avgResult = sumResult / array.length;
+
+  return avgResult;
+}
+
+export { arraySum, arrayAvg };

@@ -5,6 +5,7 @@ import {
   deleteItem,
   searchForSpecificGrade,
   sumStudentGradeValue,
+  subjectActivitiesAvg,
 } from '../controller/gradesController.js';
 
 const router = express.Router();
@@ -62,6 +63,14 @@ router.get('/studentGrade/total', async (req, res, next) => {
     }
 
     res.send(await sumStudentGradeValue(req.body.student, req.body.subject));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/subjectActivitiesAvg/:subject/:type', async (req, res, next) => {
+  try {
+    res.send(await subjectActivitiesAvg(req.params.subject, req.params.type));
   } catch (err) {
     next(err);
   }

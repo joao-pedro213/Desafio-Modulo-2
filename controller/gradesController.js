@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { arraySum } from '../libs/operacoes.js';
+import { arraySum, arrayAvg } from '../libs/operacoes.js';
 
 const { readFile, writeFile } = fs;
 
@@ -122,10 +122,43 @@ async function sumStudentGradeValue(student, subject) {
   return `A nota do aluno(a) ${student} para a disciplina [${subject}] é: ${arraySum(studentSubjectActivities)}`;
 }
 
+async function subjectActivitiesAvg(subject, type) {
+  const data = JSON.parse(await readFile(global.fileName));
+
+  let filteredSubjectActivities = [];
+
+  const isSubject = data.grades.some((grade) => {
+    return grade.subject === subject;
+  });
+
+  const isSubjectType = data.grades.some((grade) => {
+    return grade.subject === subject && grade.type === type;
+  });
+
+  // prettier-ignore
+  if (!isSubject) {
+    throw new Error(`A disciplina ${subject} não está existe.`)
+  } else if (!!isSubject && !isSubjectType) {
+    throw new Error(`Não existe nenhuma atividade categorizada como ${type} para a disciplina ${subject}.`)
+  }
+
+  filteredSubjectActivities = data.grades
+    .filter((grade) => {
+      return grade.subject === subject && grade.type === type;
+    })
+    .map((grade) => {
+      return grade.value;
+    });
+
+  // prettier-ignore
+  return `A média das notas da atividade de categoria '${type}' para a disciplina [${subject}] é: ${arrayAvg(filteredSubjectActivities)}`;
+}
+
 export {
   insertItem,
   updateItem,
   deleteItem,
   searchForSpecificGrade,
   sumStudentGradeValue,
+  subjectActivitiesAvg,
 };
