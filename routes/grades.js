@@ -11,10 +11,6 @@ import {
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('grades route is working.');
-});
-
 router.post('/', async (req, res, next) => {
   try {
     // prettier-ignore
