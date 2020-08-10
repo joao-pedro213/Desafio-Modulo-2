@@ -101,6 +101,9 @@ async function searchForSpecificGrade(id) {
 async function sumStudentGradeValue(student, subject) {
   const data = JSON.parse(await readFile(global.fileName));
 
+  let studentSubjectActivities = [];
+  let studentSubjectActivitiesValue = [];
+
   const isStudent = data.grades.some((grade) => {
     return grade.student === student && grade.subject === subject;
   });
@@ -111,15 +114,15 @@ async function sumStudentGradeValue(student, subject) {
     );
   }
 
-  let studentSubjectActivities = data.grades.filter((grade) => {
+  studentSubjectActivities = data.grades.filter((grade) => {
     return grade.student === student && grade.subject === subject;
   });
 
-  studentSubjectActivities = studentSubjectActivities.map((activity) => {
+  studentSubjectActivitiesValue = studentSubjectActivities.map((activity) => {
     return activity.value;
   });
   // prettier-ignore
-  return `A nota do aluno(a) ${student} para a disciplina [${subject}] é: ${arraySum(studentSubjectActivities)}`;
+  return `A nota do aluno(a) ${student} para a disciplina [${subject}] é: ${arraySum(studentSubjectActivitiesValue)}`;
 }
 
 async function subjectActivitiesAvg(subject, type) {

@@ -1,6 +1,14 @@
 {
-  "nextId": 62,
+  "nextId": 50,
   "grades": [
+    {
+      "id": 1,
+      "student": "Loiane Groner",
+      "subject": "01 - JavaScript",
+      "type": "Fórum",
+      "value": 15,
+      "timestamp": "2020-05-19T18:21:24.958Z"
+    },
     {
       "id": 2,
       "student": "Loiane Groner",
@@ -242,20 +250,12 @@
       "timestamp": "2020-05-19T18:21:25.171Z"
     },
     {
-      "id": 32,
-      "student": "Roberto Achar",
-      "subject": "04 - MongoDB",
-      "type": "Trabalho Prático",
-      "value": 16,
-      "timestamp": "2020-05-19T18:21:25.178Z"
-    },
-    {
       "id": 33,
       "student": "Roberto Achar",
       "subject": "01 - JavaScript",
       "type": "Desafio",
-      "value": 25,
-      "timestamp": "2020-05-19T18:21:25.184Z"
+      "value": 15,
+      "timestamp": "2020-08-10T00:43:51.007Z"
     },
     {
       "id": 34,
@@ -379,83 +379,11 @@
     },
     {
       "id": 49,
-      "student": "João Pedro Amaral",
-      "subject": "01 - JavaScript",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-07T23:43:52.826Z"
-    },
-    {
-      "id": 50,
-      "student": "João Pedro Capobiango",
-      "subject": "04 - MongoDB",
-      "type": "Desafio",
-      "value": 45,
-      "timestamp": "2020-08-09T14:28:04.755Z"
-    },
-    {
-      "id": 51,
-      "student": "João Pedro Amaral",
-      "subject": "01 - JavaScript",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-07T23:49:39.017Z"
-    },
-    {
-      "id": 52,
-      "student": "Juliana Marques",
-      "subject": "01 - JavaScript",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-07T23:53:18.656Z"
-    },
-    {
-      "id": 53,
-      "student": "Juliana Marques",
-      "subject": "01 - JavaScript",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-07T23:53:57.649Z"
-    },
-    {
-      "id": 57,
-      "student": "Gustavo de Abreu",
-      "subject": "02 - JavaScript",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-09T14:09:33.269Z"
-    },
-    {
-      "id": 58,
-      "student": "Gustavo de Abreu",
+      "student": "Roberto Achar",
       "subject": "03 - React",
       "type": "Fórum",
       "value": 10,
-      "timestamp": "2020-08-09T14:10:47.743Z"
-    },
-    {
-      "id": 59,
-      "student": "Gustavo de Abreu",
-      "subject": "03 - React",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-09T14:16:40.835Z"
-    },
-    {
-      "id": 60,
-      "student": "Gustavo de Abreu",
-      "subject": "03 - React",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-09T14:18:55.267Z"
-    },
-    {
-      "id": 61,
-      "student": "Gustavo de Abreu",
-      "subject": "03 - React",
-      "type": "Fórum",
-      "value": 10,
-      "timestamp": "2020-08-09T14:22:10.708Z"
+      "timestamp": "2020-08-10T00:41:01.743Z"
     }
   ]
 }
