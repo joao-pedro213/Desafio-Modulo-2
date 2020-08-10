@@ -77,9 +77,13 @@ router.get('/subjectActivities/Avg', async (req, res, next) => {
   }
 });
 
-router.get('/topThreeGrades/:subject/:type', async (req, res, next) => {
+router.get('/topThree/Grades', async (req, res, next) => {
   try {
-    res.send(await topThreeGrades(req.params.subject, req.params.type));
+    // prettier-ignore
+    if (!req.body.subject || !req.body.type) {
+          throw new Error('Informe a matéria e a categoria de atividade que deseja buscar.')
+        }
+    res.send(await topThreeGrades(req.body.subject, req.body.type));
   } catch (err) {
     next(err);
   }
